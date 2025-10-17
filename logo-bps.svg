@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">BPS Expertise DAF</title>
+  <desc id="desc">Logo stylisé de BPS Expertise DAF avec un halo doré et des lettres bleu nuit.</desc>
+  <defs>
+    <radialGradient id="halo" cx="50%" cy="32%" r="60%">
+      <stop offset="0%" stop-color="#f2d88a" stop-opacity="0.85" />
+      <stop offset="45%" stop-color="#f5e2a9" stop-opacity="0.35" />
+      <stop offset="90%" stop-color="#0a2540" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#444d5f" />
+      <stop offset="100%" stop-color="#2a2f3d" />
+    </linearGradient>
+    <linearGradient id="text" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0d2440" />
+      <stop offset="100%" stop-color="#05152a" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="56" fill="url(#bg)" />
+  <ellipse cx="256" cy="180" rx="220" ry="160" fill="url(#halo)" />
+  <g fill="url(#text)">
+    <text x="256" y="240" font-family="'Playfair Display', 'Times New Roman', serif" font-weight="700" font-size="170" text-anchor="middle" letter-spacing="8">BPS</text>
+    <text x="256" y="322" font-family="'Inter', 'Helvetica Neue', sans-serif" font-weight="600" font-size="46" text-anchor="middle" fill="#dcd7cc">EXPERTISE DAF</text>
+  </g>
+</svg>
