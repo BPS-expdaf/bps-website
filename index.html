@@ -41,16 +41,8 @@
       display: block;
     }
 
-    @media (max-width: 768px) {
-  .profile {
-    flex-direction: column;
-  }
+   
 
-  .profile img {
-    width: 100%;
-    height: auto;
-  }
-}
     header {
       position: sticky;
       top: 0;
@@ -410,6 +402,37 @@
         position: static;
       }
     }
+    /* === Bloc profil (image à gauche du texte) === */
+.profile {
+  display: flex;
+  align-items: stretch;
+  gap: 2rem;
+}
+
+.profile img {
+  object-fit: cover;
+  width: 40%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 18px 45px rgba(10, 37, 64, 0.2);
+}
+
+.profile > div {
+  flex: 1;
+}
+
+/* === Responsive profil === */
+@media (max-width: 768px) {
+  .profile {
+    flex-direction: column;
+  }
+
+  .profile img {
+    width: 100%;
+    height: auto;
+  }
+}
+
   </style>
 </head>
 <body>
