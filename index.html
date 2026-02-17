@@ -1,725 +1,1380 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pétula Doyon – DAF à temps partagé | BPS Expertise DAF</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --color-navy: #0A2540;
-      --color-gold: #C89B3C;
-      --color-cream: #F7F3EB;
-      --color-light: #FFFFFF;
-      --color-sand: #E8DED1;
-      --color-slate: #1F3C5A;
-      --color-text: #1B1B1B;
-      scroll-behavior: smooth;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      color: var(--color-text);
-      background-color: var(--color-cream);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-   
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(14px);
-      background: rgba(10, 37, 64, 0.92);
-    }
-
-    .navbar {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-    }
-
-    .navbar-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      color: var(--color-light);
-      font-weight: 600;
-    }
-
-    .navbar-logo img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-      margin: 0;
-      padding: 0;
-    }
-
-    nav a {
-      color: var(--color-light);
-      font-weight: 500;
-      font-size: 0.95rem;
-    }
-
-    .hero {
-      background: linear-gradient(110deg, rgba(10, 37, 64, 0.88), rgba(10, 37, 64, 0.5)),
-        url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80') center/cover;
-      color: var(--color-light);
-      padding: 7rem 1.5rem 6rem;
-    }
-
-    .hero-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.3rem, 4vw, 3.4rem);
-      line-height: 1.2;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero p.lead {
-      font-size: 1.15rem;
-      max-width: 580px;
-      margin-bottom: 1.5rem;
-    }
-
-    .tagline {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      padding: 0.5rem 0.75rem;
-      border-radius: 999px;
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.85rem 1.85rem;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 1rem;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      text-decoration: none;
-    }
-
-    .btn-primary {
-      background: var(--color-gold);
-      color: var(--color-navy);
-      box-shadow: 0 14px 30px rgba(200, 155, 60, 0.32);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 36px rgba(200, 155, 60, 0.36);
-    }
-
-    .btn-outline {
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      color: var(--color-light);
-      background: transparent;
-    }
-
-    section {
-      padding: clamp(3rem, 8vw, 5.5rem) 1.5rem;
-    }
-
-    .section-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-    }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 600;
-      font-size: clamp(1.9rem, 3vw, 2.7rem);
-      margin-bottom: 1.5rem;
-      color: var(--color-navy);
-    }
-
-    .section-subtitle {
-      font-size: 1.15rem;
-      max-width: 640px;
-      color: rgba(27, 27, 27, 0.78);
-      margin-bottom: 2.5rem;
-    }
-
-    .cards-grid {
-      display: grid;
-      gap: 1.75rem;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-
-    .card {
-      background: var(--color-light);
-      border-radius: 18px;
-      padding: 1.8rem;
-      box-shadow: 0 20px 45px rgba(10, 37, 64, 0.08);
-      border: 1px solid rgba(10, 37, 64, 0.05);
-    }
-
-    .card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.75rem;
-      color: var(--color-slate);
-    }
-
-    .card ul {
-      padding-left: 1.1rem;
-      margin: 0;
-    }
-
-    .pillars {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
-
-    .pillar {
-      background: rgba(10, 37, 64, 0.9);
-      color: var(--color-light);
-      border-radius: 16px;
-      padding: 1.6rem;
-    }
-
-    .pillar span {
-      font-size: 2rem;
-      display: inline-block;
-      margin-bottom: 0.75rem;
-    }
-
-    .profile {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2.5rem;
-      align-items: center;
-      background: linear-gradient(135deg, #ffffff 0%, #f5efe6 100%);
-      border-radius: 24px;
-      padding: 2.5rem;
-      box-shadow: 0 25px 50px rgba(10, 37, 64, 0.12);
-    }
-
-    .profile img {
-      border-radius: 22px;
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      box-shadow: 0 18px 45px rgba(10, 37, 64, 0.2);
-    }
-
-    .profile .certifications {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1.5rem;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .profile .certifications img {
-      width: 110px;
-      height: auto;
-      border-radius: 12px;
-      background: var(--color-light);
-      padding: 0.5rem;
-      box-shadow: 0 10px 25px rgba(10, 37, 64, 0.08);
-    }
-
-    .missions-grid {
-      display: grid;
-      gap: 1.75rem;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-
-    .mission-card {
-      background: var(--color-light);
-      border-radius: 18px;
-      padding: 2rem;
-      border: 1px solid rgba(10, 37, 64, 0.08);
-      box-shadow: 0 18px 45px rgba(10, 37, 64, 0.08);
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .mission-card h3 {
-      margin: 0;
-      font-size: 1.3rem;
-      color: var(--color-slate);
-    }
-
-    .mission-card .context {
-      font-weight: 600;
-    }
-
-    .cta-section {
-      background: linear-gradient(120deg, var(--color-navy), #132e4f);
-      color: var(--color-light);
-      text-align: center;
-      border-radius: 28px;
-      padding: clamp(3rem, 6vw, 4.5rem) 1.5rem;
-      box-shadow: 0 25px 60px rgba(10, 37, 64, 0.35);
-      margin-top: 3rem;
-    }
-
-    .cta-section h2 {
-      margin-bottom: 1rem;
-      color: var(--color-light);
-    }
-
-    .cta-section p {
-      font-size: 1.05rem;
-      margin-bottom: 2rem;
-    }
-
-    .resources {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .resource-link {
-      padding: 0.75rem 1.25rem;
-      background: rgba(10, 37, 64, 0.1);
-      border-radius: 999px;
-      font-weight: 500;
-      color: var(--color-slate);
-      border: 1px solid rgba(10, 37, 64, 0.08);
-      transition: background 0.2s ease, transform 0.2s ease;
-    }
-
-    .resource-link:hover {
-      background: rgba(10, 37, 64, 0.18);
-      transform: translateY(-1px);
-    }
-
-    footer {
-      background: var(--color-navy);
-      color: var(--color-light);
-      padding: 2.5rem 1.5rem;
-    }
-
-    .footer-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      display: grid;
-      gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      align-items: start;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      text-align: center;
-      font-size: 0.85rem;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      font-size: 0.95rem;
-    }
-
-    .socials {
-      display: flex;
-      gap: 0.75rem;
-      margin-top: 0.75rem;
-    }
-
-    .socials a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      color: var(--color-light);
-      transition: background 0.2s ease;
-    }
-
-    .socials a:hover {
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    @media (max-width: 768px) {
-      nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-      }
-
-      .navbar {
-        flex-direction: column;
-      }
-
-      header {
-        position: static;
-      }
-    }
-    /* === Bloc profil (image à gauche du texte) === */
-.profile {
-  display: flex;
-  align-items: stretch;
-  gap: 2rem;
-}
-
-.profile img {
-  object-fit: cover;
-  width: 40%;
-  height: auto;
-  border-radius: 20px;
-  box-shadow: 0 18px 45px rgba(10, 37, 64, 0.2);
-}
-
-.profile > div {
-  flex: 1;
-}
-
-/* === Responsive profil === */
-@media (max-width: 768px) {
-  .profile {
-    flex-direction: column;
-  }
-
-  .profile img {
-    width: 100%;
-    height: auto;
-  }
-}
-
-  </style>
-</head>
-<body>
-  <header>
-    <div class="navbar">
-      <a class="navbar-logo" href="#top">
-        <img src="logo-bps.svg" alt="Logo BPS Expertise DAF">
-        <span>BPS Expertise DAF</span>
-      </a>
-      <nav aria-label="Navigation principale">
-        <ul>
-          <li><a href="#constat">Le constat</a></li>
-          <li><a href="#services">Mon accompagnement</a></li>
-          <li><a href="#approche">Approche</a></li>
-          <li><a href="#missions">Missions</a></li>
-          <li><a href="#parcours">Parcours</a></li>
-          <li><a href="#finaxim">Finaxim</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main id="top">
-    <section class="hero">
-      <div class="hero-inner">
-        <div>
-          <div class="tagline">Pétula Doyon – DAF à temps partagé certifiée Finaxim</div>
-          <h1>Clarté des chiffres. Sérénité des décisions. Souplesse dans l'organisation.</h1>
-            <p class="lead">Vous dirigez une PME, dans les secteurs de l’hôtellerie, du commerce ou du service&nbsp;? Je vous aide à reprendre le contrôle de votre pilotage financier — cash, marges, trésorerie — grâce à une solution souple, humaine et parfaitement adaptée à votre réalité.</p>
-          <p>🎯 1&nbsp;h d’échange découverte offerte (sans engagement)</p>
-          <div class="actions">
-            <a class="btn btn-primary" href="https://calendly.com/petula-doyon/30min" target="_blank" rel="noopener">Réserver un rendez-vous</a>
-            <a class="btn btn-outline" href="#contact">Voir les coordonnées</a>
-          </div>
-        </div>
-        <div>
-          <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80" alt="Tableau de bord financier présenté lors d'une réunion de direction">
-        </div>
-      </div>
-    </section>
-
-    <section id="constat">
-      <div class="section-inner">
-        <h2 class="section-title">Quand la finance passe après l’urgence…</h2>
-        <p class="section-subtitle">Diriger une entreprise, c’est jongler entre développement, trésorerie, recrutement, fournisseurs… Et souvent, la finance devient un point aveugle. Jusqu’au jour où les questions se bousculent. C’est précisément à ce moment que j’interviens&nbsp;: transformer vos chiffres en décisions concrètes, utiles et simples à suivre.</p>
-        <div class="cards-grid">
-          <div class="card">
-              <h3>Vos interrogations</h3>
-              <ul>
-                <li>Où en est vraiment ma rentabilité&nbsp;?</li>
-                <li>Ai-je la trésorerie nécessaire pour mes projets&nbsp;?</li>
-                <li>Aucune visibilité sur l’activité en cours avant de recevoir les éléments de clôture fournis par l’expert-comptable.</li>
-                <li>Comment anticiper sans y passer mes soirées&nbsp;?</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Mon rôle</h3>
-            <p>Je transforme l’urgence en pilotage contrôlé, étape par étape. Vous retrouvez de la visibilité, un langage commun avec vos partenaires, et la sérénité pour décider.</p>
-            <a class="resource-link" href="https://audit.finaxim.fr/auditez-votre-performance-financiere/?expert=pdoyon@finaxim.fr" target="_blank" rel="noopener">Audit flash gratuit</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" style="background: var(--color-light);">
-      <div class="section-inner">
-        <h2 class="section-title">Une direction financière souple, au rythme de vos besoins</h2>
-        <p class="section-subtitle">Chaque entreprise a ses urgences et ses priorités. Mon accompagnement s’adapte à votre situation — qu’il s’agisse de structurer, d’anticiper ou de restaurer le pilotage.</p>
-        <div class="cards-grid">
-          <div class="card">
-            <h3>En phase de croissance</h3>
-            <ul>
-              <li>Structurer la fonction finance et fiabiliser les données</li>
-              <li>Anticiper la trésorerie et accompagner les décisions d’investissement</li>
-              <li>Résultat&nbsp;: croissance maîtrisée, rentabilité consolidée, temps retrouvé</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>En période de tension</h3>
-            <ul>
-              <li>Restaurer la visibilité financière et redresser les marges</li>
-              <li>Rassurer les partenaires bancaires et sécuriser le cash</li>
-              <li>Résultat&nbsp;: situation sous contrôle, marges redressées, décisions sereines</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>En transition</h3>
-            <ul>
-              <li>Clarifier les flux et préparer la facturation électronique (Facture X)</li>
-              <li>Piloter les projets de transformation et les changements d’outils</li>
-              <li>Résultat&nbsp;: conformité, lisibilité et gain de temps</li>
-            </ul>
-          </div>
-        </div>
-        <div class="cta-section" style="margin-top: 3.5rem;">
-          <h2>🎯 1 h d’échange découverte offerte</h2>
-          <p>Un temps d’échange privilégié pour comprendre vos enjeux, prioriser vos actions et bâtir ensemble votre feuille de route financière.</p>
-          <a class="btn btn-primary" href="https://calendly.com/petula-doyon/30min" target="_blank" rel="noopener">Réserver un échange découverte</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="approche">
-      <div class="section-inner">
-        <h2 class="section-title">Une approche simple, humaine et orientée résultats</h2>
-        <p class="section-subtitle">Mon objectif : que vous puissiez dire «&nbsp;Je comprends enfin mes chiffres… et je sais quoi en faire.&nbsp;»</p>
-        <div class="pillars">
-          <div class="pillar">
-            <span>1️⃣</span>
-            <h3>Clarté</h3>
-            <p>Des outils lisibles, pas des usines à chiffres. Je vous propose des tableaux de bord actionnables et adaptés à votre niveau de maturité.</p>
-          </div>
-          <div class="pillar">
-            <span>2️⃣</span>
-            <h3>Souplesse</h3>
-            <p>Une présence à la carte, au rythme de vos besoins. J’intègre vos équipes et vos process pour piloter au plus près du terrain.</p>
-          </div>
-          <div class="pillar">
-            <span>3️⃣</span>
-            <h3>Action</h3>
-            <p>Chaque indicateur débouche sur un plan concret. Nous sécurisons vos objectifs en mobilisant vos équipes et vos partenaires.</p>
-          </div>
-        </div>
-        <div class="resources">
-          <a class="resource-link" href="https://finaxim.fr/temoignages-video/" target="_blank" rel="noopener">Découvrez Finaxim en vidéo</a>
-          <a class="resource-link" href="https://finaxim.fr" target="_blank" rel="noopener">Finaxim – Le réseau</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="missions" style="background: var(--color-light);">
-      <div class="section-inner">
-        <h2 class="section-title">Des accompagnements sur mesure. Des résultats tangibles.</h2>
-          <p class="section-subtitle">Ces missions illustrent la pertinence de l’intervention d’un DAF à temps partagé, les résultats et la plus-value attendue pour les dirigeants de PME.</p>
-        <div class="missions-grid">
-          <article class="mission-card">
-            <h3>🏭 PME industrielle en croissance</h3>
-            <p class="context"><strong>Contexte :</strong> forte accélération du chiffre d’affaires, trésorerie sous tension à cause des délais clients.</p>
-            <p><strong>Méthode :</strong> diagnostic cash/BFR, plan de trésorerie glissant, relances clients structurées, priorisation des flux fournisseurs.</p>
-            <ul>
-              <li>DSO réduit de 18&nbsp;% en 4 mois</li>
-              <li>Trésorerie positive sur toute l’année</li>
-              <li>Dialogue bancaire facilité et taux renégocié</li>
-            </ul>
-          </article>
-          <article class="mission-card">
-            <h3>🏨 Groupe hôtelier multi-sites</h3>
-            <p class="context"><strong>Contexte :</strong> manque de visibilité consolidée, marges très variables selon les établissements.</p>
-            <p><strong>Méthode :</strong> tableau de bord global, reporting par site, indicateurs de performance (RevPAR, marge, coût d’acquisition).</p>
-            <ul>
-              <li>Rentabilité par site identifiée et ajustée</li>
-              <li>Process décisionnel plus rapide</li>
-              <li>Réduction du coût d’acquisition et meilleure allocation budgétaire</li>
-            </ul>
-          </article>
-          <article class="mission-card">
-            <h3>🧩 PME en tension de trésorerie</h3>
-            <p class="context"><strong>Contexte :</strong> retards de paiement récurrents, pression des fournisseurs, absence de pilotage.</p>
-            <p><strong>Méthode :</strong> audit du cycle order-to-cash, renégociation des échéanciers, politique de relance et suivi hebdomadaire.</p>
-            <ul>
-              <li>Réduction des impayés de 40&nbsp;%</li>
-              <li>Rétablissement d’un solde cash positif en 3 mois</li>
-              <li>Confiance restaurée avec les partenaires financiers</li>
-            </ul>
-          </article>
-        </div>
-        <div class="cta-section">
-          <h2>Prêt·e à retrouver de la visibilité financière&nbsp;?</h2>
-          <p>Je vous propose un entretien découverte d’1&nbsp;h, offert et sans engagement, pour faire le point sur vos défis financiers, explorer vos priorités et identifier les leviers à activer.</p>
-          <a class="btn btn-primary" href="https://calendly.com/petula-doyon/30min" target="_blank" rel="noopener">Discutons de votre situation</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="parcours">
-      <div class="section-inner">
-        <h2 class="section-title">Qui je suis, pourquoi je le fais</h2>
-        <div class="profile">
-          <img src="petula-doyon.png.png" alt="Portrait professionnel de Pétula Doyon, DAF à temps partagé" loading="lazy" decoding="async">
-          <div>
-            <p>Je m’appelle Pétula Doyon. Depuis plus de dix ans, je navigue à l’intersection de la finance, de la stratégie et du terrain.</p>
-            <p>Mon parcours débute dans l’hôtellerie — j’ai connu les contraintes de saisonnalité, l’arbitrage des coûts, la quête du RevPAR. <p>
-            <p>J’ai ensuite intégré une filiale américaine dans le secteur du commerce BtoB de marquage industriel, en tant que <strong>Directrice Administrative et Financière</strong> – membre du Comité de Direction. Véritable bras droit du dirigeant, j’ai conduit la transformation de la fonction finance dans un environnement international exigeant :
-</p>
-
-<ul>
-  <li>Pilotage du cash, du BFR et du DSO,</li>
-  <li>Clôtures mensuelles et reporting multi-normes IFRS / US GAAP / French GAAP,</li>
-  <li>Animation du forecast et du budget, avec suivi des écarts et plans d’action,</li>
-  <li>Structuration des process transverses (order-to-cash, procure-to-pay, contrôle interne),</li>
-  <li>Coordination des audits (CAC, auditeurs US, experts-comptables).</li>
-</ul>
-
-<p>
-  Mon rôle allait bien au-delà des chiffres : co-piloter la stratégie, soutenir la décision, anticiper les risques et sécuriser la croissance.
-</p>
-
-<p>
-  Cette expérience m’a forgé une approche globale et pragmatique du pilotage d’entreprise — à la fois stratégique, opérationnelle et orientée résultats.
-</p>
-</p>
-            <p>Ce double contexte — hôtellerie exigeante et industrie structurée — m’a forgé une sensibilité rare : je pense en chiffres, mais je raisonne en hommes, équipes et réalités opérationnelles.</p>
-            <p>Aujourd’hui, j’interviens comme DAF à temps partagé. Mon credo ? <strong>« Vos chiffres doivent vous servir, pas vous épuiser. »</strong> Avec moi, pas de jargon inutile ni de promesses creuses. Seulement des plans d’action, des bilans clairs, des décisions éclairées — et une collaboration sur-mesure.</p>
-            <div class="certifications">
-              <img src="logo-finaxim-certification.png" alt="Badge Directrice certifiée Finaxim">
-              <img src="logo-bps.svg" alt="Logo BPS Expertise DAF">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="finaxim" style="background: var(--color-light);">
-      <div class="section-inner">
-        <h2 class="section-title">Pourquoi s’appuyer sur moi et le réseau Finaxim</h2>
-        <div class="cards-grid">
-          <div class="card">
-            <h3>Finaxim en chiffres</h3>
-            <ul>
-                <li>+25 ans d’expertise dans le temps partagé</li>
-                <li>+100 experts actifs sur tout le territoire</li>
-                <li>+500 missions réalisées chaque année</li>
-                <li>Fonctions support : finance, RH, DSI, commerce, RSE, recrutement, marketing</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Valeur pour votre entreprise</h3>
-              <p>Je suis DAF certifiée Finaxim, membre d’un réseau national de cadres exécutifs. Grâce à cette communauté, je mobilise rapidement des experts complémentaires (juridique, SI, RH…) pour enrichir votre mission.</p>
-            <p><strong>Valeur ajoutée :</strong> solidité collective + flexibilité individuelle. Vous bénéficiez d’un accompagnement rigoureux tout en préservant la souplesse de votre structure.</p>
-            <a class="resource-link" href="https://finaxim.fr" target="_blank" rel="noopener">En savoir plus sur Finaxim</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="section-inner">
-        <h2 class="section-title">Et si on en parlait simplement&nbsp;?</h2>
-        <p class="section-subtitle">Je vous propose un entretien découverte d’1&nbsp;h, offert et sans engagement. Un temps d’échange privilégié pour comprendre vos enjeux, vos priorités et identifier ensemble vos leviers de performance.</p>
-        <div class="cards-grid">
-          <div class="card" style="background: var(--color-navy); color: var(--color-light);">
-            <h3>📅 Réserver un créneau</h3>
-            <p>Choisissez directement le créneau qui vous convient sur mon agenda en ligne.</p>
-            <a class="btn btn-primary" href="https://calendly.com/petula-doyon/30min" target="_blank" rel="noopener">Planifier 1 h offerte</a>
-          </div>
-          <div class="card">
-            <h3>📬 Me contacter</h3>
-            <p><strong>Email :</strong> <a href="mailto:pdoyon@finaxim.fr">pdoyon@finaxim.fr</a></p>
-            <p><strong>Téléphone :</strong> <a href="tel:+33783875545">07&nbsp;83&nbsp;87&nbsp;55&nbsp;45</a></p>
-            <p><strong>LinkedIn :</strong> <a href="https://www.linkedin.com/in/petula-doyon" target="_blank" rel="noopener">petula-doyon</a></p>
-            <p><strong>Audit flash :</strong> <a href="https://audit.finaxim.fr/auditez-votre-performance-financiere/?expert=pdoyon@finaxim.fr" target="_blank" rel="noopener">Auditez votre performance financière</a></p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-      <div>
-        <img src="logo-bps.svg" alt="Logo BPS Expertise DAF" style="width: 80px; margin-bottom: 1rem;">
-        <p>BPS Expertise DAF – Direction financière à temps partagé menée par Pétula Doyon, DAF certifiée Finaxim.</p>
-        <div class="socials">
-          <a href="https://www.linkedin.com/in/petula-doyon" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
-          <a href="https://calendly.com/petula-doyon/30min" target="_blank" rel="noopener" aria-label="Calendly">📅</a>
-        </div>
-      </div>
-      <div class="footer-links">
-        <strong>Liens utiles</strong>
-        <a href="https://yon@finaxim.fr" target="_blank" rel="noopenRéseau Finaxim</a>
-        <a href="https://yon@finaxi/temoignages-video/" target="_blank" rel="noopener">Découvrir Finaxim en vidéo</a>
-        <a href="https://audit.finaxim.fr/auditez-votre-performance-financiere/?expert=pdoyon@finaxim.fr" target="_blank" rel="noopener">Audit flash gratuit</a>
-        <a href="#contact">Prendre rendez-vous</a>
-      </div>
-      <div class="footer-links">
-        <strong>Ressources</strong>
-        <a href="#missions">Cas clients</a>
-        <a href="#approche">Approche</a>
-        <a href="#parcours">Parcours</a>
-        <a href="#finaxim">Réseau Finaxim</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2025 BPS Expertise DAF – Pétula Doyon. Mentions légales | Politique de confidentialité</p>
-      <p>Télécharger mon e-book : «&nbsp;Facture X — Comment s’y préparer concrètement&nbsp;»</p>
-    </div>
-  </footer>
-</body>
-</html>
+  1	<!DOCTYPE html>
+     2	<html lang="fr">
+     3	<head>
+     4	  <meta charset="UTF-8">
+     5	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6	  <title>DAF Temps Partagé PME | Pétula Doyon - Direction Financière Externalisée Finaxim</title>
+     7	  <meta name="description" content="DAF à temps partagé certifiée Finaxim. Pilotage financier, trésorerie et digitalisation pour PME. Solution souple et humaine. 1h découverte offerte.">
+     8	  <meta name="keywords" content="DAF temps partagé, direction financière externalisée, directeur financier externalisé, pilotage financier PME, DAF externalisé, Finaxim, trésorerie PME, digitalisation financière, Facture X">
+     9	  
+    10	  <!-- Open Graph -->
+    11	  <meta property="og:type" content="website">
+    12	  <meta property="og:title" content="Pétula Doyon - DAF Temps Partagé pour PME">
+    13	  <meta property="og:description" content="Direction financière externalisée : pilotage financier, trésorerie, digitalisation. Expertise Finaxim.">
+    14	  <meta property="og:url" content="https://bps-expertise-daf.com">
+    15	  <meta property="og:image" content="https://bps-expertise-daf.com/petula-doyon.png">
+    16	  
+    17	  <!-- Twitter Card -->
+    18	  <meta name="twitter:card" content="summary_large_image">
+    19	  <meta name="twitter:title" content="Pétula Doyon - DAF Temps Partagé PME">
+    20	  <meta name="twitter:description" content="Direction financière externalisée pour PME. Expertise Finaxim.">
+    21	  
+    22	  <link rel="canonical" href="https://bps-expertise-daf.com">
+    23	  <link rel="preconnect" href="https://fonts.googleapis.com">
+    24	  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    25	  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    26	  
+    27	  <style>
+    28	    /* === PALETTE DE COULEURS ENRICHIE === */
+    29	    :root {
+    30	      /* Navy - 6 nuances */
+    31	      --navy-darker: #040F1C;
+    32	      --navy-dark: #061829;
+    33	      --navy-base: #0A2540;
+    34	      --navy-medium: #1F3C5A;
+    35	      --navy-light: #2E5070;
+    36	      --navy-lighter: #4A6B8A;
+    37	      
+    38	      /* Gold - 5 nuances */
+    39	      --gold-dark: #B08630;
+    40	      --gold-base: #C89B3C;
+    41	      --gold-light: #D4AD5F;
+    42	      --gold-lighter: #E0BF82;
+    43	      --gold-pale: #F0E0C4;
+    44	      
+    45	      /* Cream - 4 nuances */
+    46	      --cream-dark: #E8DED1;
+    47	      --cream-base: #F7F3EB;
+    48	      --cream-light: #FAF7F2;
+    49	      --cream-white: #FDFCFA;
+    50	      
+    51	      /* Text - 4 niveaux */
+    52	      --text-primary: #0F1419;
+    53	      --text-secondary: #4A4A4A;
+    54	      --text-muted: #757575;
+    55	      --text-light: #FFFFFF;
+    56	      
+    57	      /* Ombres multi-niveaux */
+    58	      --shadow-xs: 0 1px 4px rgba(10, 37, 64, 0.05);
+    59	      --shadow-sm: 0 2px 8px rgba(10, 37, 64, 0.08);
+    60	      --shadow-md: 0 4px 20px rgba(10, 37, 64, 0.12);
+    61	      --shadow-lg: 0 8px 32px rgba(10, 37, 64, 0.16);
+    62	      --shadow-xl: 0 16px 48px rgba(10, 37, 64, 0.22);
+    63	      --shadow-gold: 0 8px 32px rgba(200, 155, 60, 0.35);
+    64	      --shadow-gold-hover: 0 12px 40px rgba(200, 155, 60, 0.45);
+    65	      
+    66	      /* Transitions */
+    67	      --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    68	      --transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    69	      
+    70	      scroll-behavior: smooth;
+    71	    }
+    72	
+    73	    /* === BASE === */
+    74	    * {
+    75	      box-sizing: border-box;
+    76	      margin: 0;
+    77	      padding: 0;
+    78	    }
+    79	
+    80	    body {
+    81	      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    82	      color: var(--text-primary);
+    83	      background-color: var(--cream-base);
+    84	      line-height: 1.7;
+    85	      -webkit-font-smoothing: antialiased;
+    86	      -moz-osx-font-smoothing: grayscale;
+    87	    }
+    88	
+    89	    ::selection {
+    90	      background: var(--gold-light);
+    91	      color: var(--navy-darker);
+    92	    }
+    93	
+    94	    /* === HEADER === */
+    95	    header {
+    96	      position: sticky;
+    97	      top: 0;
+    98	      z-index: 1000;
+    99	      background: rgba(4, 15, 28, 0.95);
+   100	      backdrop-filter: blur(16px);
+   101	      border-bottom: 1px solid rgba(200, 155, 60, 0.2);
+   102	      box-shadow: var(--shadow-sm);
+   103	      transition: var(--transition-smooth);
+   104	    }
+   105	
+   106	    header.scrolled {
+   107	      background: rgba(4, 15, 28, 0.98);
+   108	      box-shadow: var(--shadow-md);
+   109	      border-bottom-color: rgba(200, 155, 60, 0.35);
+   110	    }
+   111	
+   112	    .navbar {
+   113	      max-width: 1200px;
+   114	      margin: 0 auto;
+   115	      padding: 1rem 2rem;
+   116	      display: flex;
+   117	      align-items: center;
+   118	      justify-content: space-between;
+   119	      gap: 2rem;
+   120	    }
+   121	
+   122	    .navbar-logo {
+   123	      display: flex;
+   124	      align-items: center;
+   125	      gap: 0.75rem;
+   126	      color: var(--text-light);
+   127	      font-weight: 700;
+   128	      font-size: 1.05rem;
+   129	      transition: var(--transition-smooth);
+   130	    }
+   131	
+   132	    .navbar-logo:hover {
+   133	      color: var(--gold-light);
+   134	      transform: translateX(2px);
+   135	    }
+   136	
+   137	    .navbar-logo img {
+   138	      width: 48px;
+   139	      height: 48px;
+   140	      filter: drop-shadow(0 2px 8px rgba(200, 155, 60, 0.3));
+   141	    }
+   142	
+   143	    nav ul {
+   144	      list-style: none;
+   145	      display: flex;
+   146	      gap: 2rem;
+   147	      margin: 0;
+   148	      padding: 0;
+   149	    }
+   150	
+   151	    nav a {
+   152	      color: var(--text-light);
+   153	      font-weight: 500;
+   154	      font-size: 0.95rem;
+   155	      position: relative;
+   156	      transition: var(--transition-smooth);
+   157	    }
+   158	
+   159	    nav a::after {
+   160	      content: '';
+   161	      position: absolute;
+   162	      bottom: -4px;
+   163	      left: 0;
+   164	      width: 0;
+   165	      height: 2px;
+   166	      background: var(--gold-light);
+   167	      transition: width 0.3s ease;
+   168	    }
+   169	
+   170	    nav a:hover {
+   171	      color: var(--gold-light);
+   172	    }
+   173	
+   174	    nav a:hover::after {
+   175	      width: 100%;
+   176	    }
+   177	
+   178	    /* === HERO === */
+   179	    .hero {
+   180	      background: 
+   181	        linear-gradient(110deg, 
+   182	          rgba(4, 15, 28, 0.94), 
+   183	          rgba(10, 37, 64, 0.87)),
+   184	        radial-gradient(circle at 30% 50%, 
+   185	          rgba(200, 155, 60, 0.08), 
+   186	          transparent 70%),
+   187	        url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80') center/cover;
+   188	      color: var(--text-light);
+   189	      padding: 8rem 1.5rem 7rem;
+   190	      position: relative;
+   191	    }
+   192	
+   193	    .hero-inner {
+   194	      max-width: 1200px;
+   195	      margin: 0 auto;
+   196	      display: grid;
+   197	      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+   198	      gap: 3.5rem;
+   199	      align-items: center;
+   200	    }
+   201	
+   202	    .hero h1 {
+   203	      font-family: 'Playfair Display', serif;
+   204	      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+   205	      line-height: 1.15;
+   206	      margin-bottom: 1.5rem;
+   207	      font-weight: 700;
+   208	      color: var(--text-light);
+   209	      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+   210	    }
+   211	
+   212	    .hero p.lead {
+   213	      font-size: 1.2rem;
+   214	      max-width: 600px;
+   215	      margin-bottom: 1.75rem;
+   216	      line-height: 1.8;
+   217	      color: var(--cream-light);
+   218	    }
+   219	
+   220	    .tagline {
+   221	      display: inline-flex;
+   222	      align-items: center;
+   223	      gap: 0.5rem;
+   224	      background: rgba(200, 155, 60, 0.15);
+   225	      border: 1px solid rgba(200, 155, 60, 0.35);
+   226	      padding: 0.6rem 1rem;
+   227	      border-radius: 999px;
+   228	      font-size: 0.95rem;
+   229	      margin-bottom: 1.25rem;
+   230	      font-weight: 600;
+   231	      color: var(--gold-lighter);
+   232	    }
+   233	
+   234	    .actions {
+   235	      display: flex;
+   236	      gap: 1rem;
+   237	      flex-wrap: wrap;
+   238	      margin-top: 2rem;
+   239	    }
+   240	
+   241	    /* === BUTTONS === */
+   242	    .btn {
+   243	      display: inline-flex;
+   244	      align-items: center;
+   245	      justify-content: center;
+   246	      gap: 0.5rem;
+   247	      padding: 1rem 2rem;
+   248	      border-radius: 999px;
+   249	      font-weight: 700;
+   250	      font-size: 1rem;
+   251	      border: none;
+   252	      cursor: pointer;
+   253	      transition: var(--transition-smooth);
+   254	      text-decoration: none;
+   255	      position: relative;
+   256	      overflow: hidden;
+   257	    }
+   258	
+   259	    .btn-primary {
+   260	      background: linear-gradient(135deg, var(--gold-base), var(--gold-light));
+   261	      color: var(--text-primary);
+   262	      box-shadow: var(--shadow-gold);
+   263	    }
+   264	
+   265	    .btn-primary:hover {
+   266	      transform: translateY(-3px);
+   267	      box-shadow: var(--shadow-gold-hover);
+   268	      background: linear-gradient(135deg, var(--gold-dark), var(--gold-base));
+   269	    }
+   270	
+   271	    .btn-outline {
+   272	      border: 2px solid rgba(255, 255, 255, 0.6);
+   273	      color: var(--text-light);
+   274	      background: transparent;
+   275	    }
+   276	
+   277	    .btn-outline:hover {
+   278	      background: rgba(255, 255, 255, 0.12);
+   279	      border-color: var(--gold-light);
+   280	      transform: translateY(-2px);
+   281	    }
+   282	
+   283	    /* === SECTIONS === */
+   284	    section {
+   285	      padding: clamp(4rem, 9vw, 6.5rem) 1.5rem;
+   286	    }
+   287	
+   288	    .section-inner {
+   289	      max-width: 1200px;
+   290	      margin: 0 auto;
+   291	    }
+   292	
+   293	    .section-title {
+   294	      font-family: 'Playfair Display', serif;
+   295	      font-weight: 700;
+   296	      font-size: clamp(2rem, 3.5vw, 2.9rem);
+   297	      margin-bottom: 1.5rem;
+   298	      color: var(--navy-darker);
+   299	      line-height: 1.25;
+   300	    }
+   301	
+   302	    .section-subtitle {
+   303	      font-size: 1.2rem;
+   304	      max-width: 680px;
+   305	      color: var(--text-secondary);
+   306	      margin-bottom: 3rem;
+   307	      line-height: 1.8;
+   308	    }
+   309	
+   310	    /* === CARDS === */
+   311	    .cards-grid {
+   312	      display: grid;
+   313	      gap: 2rem;
+   314	      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+   315	    }
+   316	
+   317	    .card {
+   318	      background: var(--cream-white);
+   319	      border-radius: 20px;
+   320	      padding: 2rem;
+   321	      box-shadow: var(--shadow-md);
+   322	      border: 1px solid rgba(10, 37, 64, 0.08);
+   323	      transition: var(--transition-smooth);
+   324	      position: relative;
+   325	      overflow: hidden;
+   326	    }
+   327	
+   328	    .card::before {
+   329	      content: '';
+   330	      position: absolute;
+   331	      top: 0;
+   332	      left: 0;
+   333	      width: 100%;
+   334	      height: 4px;
+   335	      background: linear-gradient(90deg, var(--gold-base), var(--gold-light));
+   336	      transform: scaleX(0);
+   337	      transform-origin: left;
+   338	      transition: transform 0.4s ease;
+   339	    }
+   340	
+   341	    .card:hover {
+   342	      transform: translateY(-6px);
+   343	      box-shadow: var(--shadow-xl);
+   344	      border-color: var(--gold-base);
+   345	    }
+   346	
+   347	    .card:hover::before {
+   348	      transform: scaleX(1);
+   349	    }
+   350	
+   351	    .card h3 {
+   352	      font-size: 1.4rem;
+   353	      margin-bottom: 1rem;
+   354	      color: var(--navy-medium);
+   355	      font-weight: 700;
+   356	    }
+   357	
+   358	    .card p {
+   359	      color: var(--text-secondary);
+   360	      line-height: 1.7;
+   361	    }
+   362	
+   363	    .card ul {
+   364	      padding-left: 1.3rem;
+   365	      margin: 0.75rem 0;
+   366	      color: var(--text-secondary);
+   367	    }
+   368	
+   369	    .card ul li {
+   370	      margin: 0.5rem 0;
+   371	      position: relative;
+   372	    }
+   373	
+   374	    .card ul li::marker {
+   375	      color: var(--gold-base);
+   376	      font-weight: bold;
+   377	    }
+   378	
+   379	    /* === PILLARS (4 piliers) === */
+   380	    .pillars {
+   381	      display: grid;
+   382	      gap: 1.75rem;
+   383	      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+   384	      margin-top: 2.5rem;
+   385	    }
+   386	
+   387	    .pillar {
+   388	      background: linear-gradient(135deg, 
+   389	        rgba(4, 15, 28, 0.96), 
+   390	        rgba(10, 37, 64, 0.93));
+   391	      color: var(--text-light);
+   392	      border-radius: 18px;
+   393	      padding: 2rem;
+   394	      border: 1px solid rgba(200, 155, 60, 0.2);
+   395	      transition: var(--transition-spring);
+   396	      position: relative;
+   397	      overflow: hidden;
+   398	    }
+   399	
+   400	    .pillar::before {
+   401	      content: '';
+   402	      position: absolute;
+   403	      top: -50%;
+   404	      right: -50%;
+   405	      width: 200%;
+   406	      height: 200%;
+   407	      background: radial-gradient(circle, rgba(200, 155, 60, 0.12), transparent 60%);
+   408	      transition: var(--transition-smooth);
+   409	      opacity: 0;
+   410	    }
+   411	
+   412	    .pillar:hover {
+   413	      transform: translateY(-6px) scale(1.02);
+   414	      box-shadow: 0 12px 40px rgba(200, 155, 60, 0.4);
+   415	      border-color: rgba(200, 155, 60, 0.5);
+   416	    }
+   417	
+   418	    .pillar:hover::before {
+   419	      opacity: 1;
+   420	    }
+   421	
+   422	    .pillar span {
+   423	      font-size: 2.5rem;
+   424	      display: inline-block;
+   425	      margin-bottom: 1rem;
+   426	      filter: drop-shadow(0 2px 8px rgba(200, 155, 60, 0.5));
+   427	    }
+   428	
+   429	    .pillar h3 {
+   430	      font-size: 1.5rem;
+   431	      margin-bottom: 0.75rem;
+   432	      color: var(--gold-lighter);
+   433	      font-weight: 700;
+   434	    }
+   435	
+   436	    .pillar p {
+   437	      color: var(--cream-light);
+   438	      line-height: 1.7;
+   439	      font-size: 0.98rem;
+   440	    }
+   441	
+   442	    /* === PROFILE === */
+   443	    .profile {
+   444	      display: flex;
+   445	      gap: 3rem;
+   446	      align-items: stretch;
+   447	      background: linear-gradient(135deg, var(--cream-white) 0%, var(--cream-light) 100%);
+   448	      border-radius: 24px;
+   449	      padding: 3rem;
+   450	      box-shadow: var(--shadow-lg);
+   451	      border: 1px solid rgba(10, 37, 64, 0.06);
+   452	    }
+   453	
+   454	    .profile img {
+   455	      width: 42%;
+   456	      height: auto;
+   457	      object-fit: cover;
+   458	      border-radius: 20px;
+   459	      box-shadow: var(--shadow-lg);
+   460	      border: 3px solid var(--gold-pale);
+   461	      transition: var(--transition-smooth);
+   462	    }
+   463	
+   464	    .profile img:hover {
+   465	      transform: scale(1.03);
+   466	      box-shadow: var(--shadow-xl);
+   467	    }
+   468	
+   469	    .profile > div {
+   470	      flex: 1;
+   471	    }
+   472	
+   473	    .profile h3 {
+   474	      color: var(--navy-medium);
+   475	      font-size: 1.3rem;
+   476	      margin: 1.5rem 0 0.75rem;
+   477	      font-weight: 700;
+   478	    }
+   479	
+   480	    .profile p {
+   481	      color: var(--text-secondary);
+   482	      margin-bottom: 1rem;
+   483	      line-height: 1.8;
+   484	    }
+   485	
+   486	    .profile strong {
+   487	      color: var(--navy-medium);
+   488	      font-weight: 700;
+   489	    }
+   490	
+   491	    .profile ul {
+   492	      margin: 0.75rem 0 1rem 1.5rem;
+   493	      color: var(--text-secondary);
+   494	    }
+   495	
+   496	    .profile ul li {
+   497	      margin: 0.5rem 0;
+   498	    }
+   499	
+   500	    .profile ul li::marker {
+   501	      color: var(--gold-base);
+   502	    }
+   503	
+   504	    .certifications {
+   505	      display: flex;
+   506	      gap: 1.25rem;
+   507	      margin-top: 2rem;
+   508	      flex-wrap: wrap;
+   509	      align-items: center;
+   510	    }
+   511	
+   512	    .certifications img {
+   513	      width: 120px;
+   514	      height: auto;
+   515	      border-radius: 12px;
+   516	      background: var(--cream-white);
+   517	      padding: 0.75rem;
+   518	      box-shadow: var(--shadow-sm);
+   519	      transition: var(--transition-smooth);
+   520	    }
+   521	
+   522	    .certifications img:hover {
+   523	      transform: translateY(-4px);
+   524	      box-shadow: var(--shadow-md);
+   525	    }
+   526	
+   527	    /* === MISSIONS === */
+   528	    .missions-grid {
+   529	      display: grid;
+   530	      gap: 2rem;
+   531	      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+   532	    }
+   533	
+   534	    .mission-card {
+   535	      background: var(--cream-white);
+   536	      border-radius: 20px;
+   537	      padding: 2.25rem;
+   538	      border: 1px solid rgba(10, 37, 64, 0.1);
+   539	      box-shadow: var(--shadow-md);
+   540	      transition: var(--transition-smooth);
+   541	    }
+   542	
+   543	    .mission-card:hover {
+   544	      transform: translateY(-6px);
+   545	      box-shadow: var(--shadow-xl);
+   546	      border-color: var(--gold-light);
+   547	    }
+   548	
+   549	    .mission-card h3 {
+   550	      margin: 0 0 1rem;
+   551	      font-size: 1.35rem;
+   552	      color: var(--navy-medium);
+   553	      font-weight: 700;
+   554	    }
+   555	
+   556	    .mission-card .context {
+   557	      font-weight: 600;
+   558	      color: var(--navy-medium);
+   559	      margin-bottom: 0.5rem;
+   560	    }
+   561	
+   562	    .mission-card p {
+   563	      color: var(--text-secondary);
+   564	      margin-bottom: 1rem;
+   565	      line-height: 1.7;
+   566	    }
+   567	
+   568	    .mission-card ul {
+   569	      padding-left: 1.3rem;
+   570	      color: var(--text-secondary);
+   571	    }
+   572	
+   573	    .mission-card ul li {
+   574	      margin: 0.6rem 0;
+   575	    }
+   576	
+   577	    .mission-card ul li::marker {
+   578	      color: var(--gold-base);
+   579	      font-weight: bold;
+   580	    }
+   581	
+   582	    /* === CTA SECTIONS === */
+   583	    .cta-section {
+   584	      background: linear-gradient(120deg, 
+   585	        var(--navy-darker) 0%, 
+   586	        var(--navy-base) 50%, 
+   587	        var(--navy-medium) 100%);
+   588	      color: var(--text-light);
+   589	      text-align: center;
+   590	      border-radius: 28px;
+   591	      padding: clamp(3.5rem, 7vw, 5rem) 2rem;
+   592	      box-shadow: var(--shadow-xl);
+   593	      margin-top: 3.5rem;
+   594	      position: relative;
+   595	      overflow: hidden;
+   596	    }
+   597	
+   598	    .cta-section::before {
+   599	      content: '';
+   600	      position: absolute;
+   601	      top: -50%;
+   602	      left: -50%;
+   603	      width: 200%;
+   604	      height: 200%;
+   605	      background: radial-gradient(circle, rgba(200, 155, 60, 0.08), transparent 70%);
+   606	      animation: pulse 8s ease-in-out infinite;
+   607	    }
+   608	
+   609	    @keyframes pulse {
+   610	      0%, 100% { transform: scale(1); opacity: 0.5; }
+   611	      50% { transform: scale(1.1); opacity: 0.8; }
+   612	    }
+   613	
+   614	    .cta-section h2 {
+   615	      margin-bottom: 1.25rem;
+   616	      color: var(--text-light);
+   617	      position: relative;
+   618	      z-index: 1;
+   619	      font-size: clamp(1.8rem, 3vw, 2.5rem);
+   620	    }
+   621	
+   622	    .cta-section p {
+   623	      font-size: 1.1rem;
+   624	      margin-bottom: 2.25rem;
+   625	      position: relative;
+   626	      z-index: 1;
+   627	      max-width: 700px;
+   628	      margin-left: auto;
+   629	      margin-right: auto;
+   630	      color: var(--cream-light);
+   631	    }
+   632	
+   633	    .cta-section .btn {
+   634	      position: relative;
+   635	      z-index: 1;
+   636	    }
+   637	
+   638	    /* === FAQ === */
+   639	    .faq-container {
+   640	      max-width: 900px;
+   641	      margin: 2.5rem auto 0;
+   642	    }
+   643	
+   644	    .faq-item {
+   645	      background: var(--cream-white);
+   646	      border-radius: 16px;
+   647	      padding: 2rem;
+   648	      margin-bottom: 1.5rem;
+   649	      box-shadow: var(--shadow-sm);
+   650	      border: 1px solid rgba(10, 37, 64, 0.08);
+   651	      transition: var(--transition-smooth);
+   652	    }
+   653	
+   654	    .faq-item:hover {
+   655	      box-shadow: var(--shadow-md);
+   656	      transform: translateY(-2px);
+   657	    }
+   658	
+   659	    .faq-item h3 {
+   660	      color: var(--navy-medium);
+   661	      font-size: 1.25rem;
+   662	      margin-bottom: 0.75rem;
+   663	      font-weight: 700;
+   664	    }
+   665	
+   666	    .faq-item p {
+   667	      color: var(--text-secondary);
+   668	      line-height: 1.8;
+   669	    }
+   670	
+   671	    /* === RESOURCES === */
+   672	    .resources {
+   673	      display: flex;
+   674	      flex-wrap: wrap;
+   675	      gap: 1rem;
+   676	      margin-top: 2rem;
+   677	    }
+   678	
+   679	    .resource-link {
+   680	      padding: 0.85rem 1.5rem;
+   681	      background: rgba(200, 155, 60, 0.08);
+   682	      border-radius: 999px;
+   683	      font-weight: 600;
+   684	      color: var(--navy-medium);
+   685	      border: 1px solid rgba(200, 155, 60, 0.2);
+   686	      transition: var(--transition-smooth);
+   687	      text-decoration: none;
+   688	      display: inline-block;
+   689	    }
+   690	
+   691	    .resource-link:hover {
+   692	      background: var(--gold-pale);
+   693	      border-color: var(--gold-base);
+   694	      transform: translateY(-2px);
+   695	      box-shadow: var(--shadow-sm);
+   696	    }
+   697	
+   698	    /* === FOOTER === */
+   699	    footer {
+   700	      background: linear-gradient(180deg, var(--navy-darker), var(--navy-dark));
+   701	      color: var(--cream-dark);
+   702	      padding: 3.5rem 1.5rem 2rem;
+   703	      border-top: 2px solid var(--gold-dark);
+   704	    }
+   705	
+   706	    .footer-inner {
+   707	      max-width: 1200px;
+   708	      margin: 0 auto;
+   709	      display: grid;
+   710	      gap: 2.5rem;
+   711	      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+   712	      align-items: start;
+   713	    }
+   714	
+   715	    .footer-inner img {
+   716	      margin-bottom: 1.25rem;
+   717	      filter: brightness(1.2);
+   718	    }
+   719	
+   720	    .footer-inner p {
+   721	      line-height: 1.7;
+   722	      color: var(--cream-light);
+   723	    }
+   724	
+   725	    .footer-links {
+   726	      display: flex;
+   727	      flex-direction: column;
+   728	      gap: 0.75rem;
+   729	      font-size: 0.98rem;
+   730	    }
+   731	
+   732	    .footer-links strong {
+   733	      color: var(--gold-lighter);
+   734	      font-size: 1.1rem;
+   735	      margin-bottom: 0.5rem;
+   736	      display: block;
+   737	    }
+   738	
+   739	    .footer-links a {
+   740	      color: var(--cream-light);
+   741	      transition: var(--transition-smooth);
+   742	      text-decoration: none;
+   743	      display: inline-block;
+   744	    }
+   745	
+   746	    .footer-links a:hover {
+   747	      color: var(--gold-light);
+   748	      transform: translateX(4px);
+   749	    }
+   750	
+   751	    .socials {
+   752	      display: flex;
+   753	      gap: 0.75rem;
+   754	      margin-top: 1rem;
+   755	    }
+   756	
+   757	    .socials a {
+   758	      display: inline-flex;
+   759	      align-items: center;
+   760	      justify-content: center;
+   761	      width: 42px;
+   762	      height: 42px;
+   763	      border-radius: 50%;
+   764	      border: 2px solid rgba(200, 155, 60, 0.4);
+   765	      color: var(--cream-light);
+   766	      transition: var(--transition-smooth);
+   767	      text-decoration: none;
+   768	      font-weight: 600;
+   769	    }
+   770	
+   771	    .socials a:hover {
+   772	      background: var(--gold-base);
+   773	      color: var(--navy-darker);
+   774	      border-color: var(--gold-base);
+   775	      transform: translateY(-3px) rotate(5deg);
+   776	      box-shadow: var(--shadow-gold);
+   777	    }
+   778	
+   779	    .footer-bottom {
+   780	      border-top: 1px solid rgba(200, 155, 60, 0.2);
+   781	      margin-top: 3rem;
+   782	      padding-top: 2rem;
+   783	      text-align: center;
+   784	      font-size: 0.9rem;
+   785	      color: var(--cream-dark);
+   786	    }
+   787	
+   788	    .footer-bottom p {
+   789	      margin: 0.5rem 0;
+   790	    }
+   791	
+   792	    /* === RESPONSIVE === */
+   793	    @media (max-width: 968px) {
+   794	      nav ul {
+   795	        flex-wrap: wrap;
+   796	        justify-content: center;
+   797	        gap: 1.25rem;
+   798	      }
+   799	
+   800	      .navbar {
+   801	        flex-direction: column;
+   802	        text-align: center;
+   803	      }
+   804	
+   805	      header {
+   806	        position: static;
+   807	      }
+   808	
+   809	      .profile {
+   810	        flex-direction: column;
+   811	      }
+   812	
+   813	      .profile img {
+   814	        width: 100%;
+   815	      }
+   816	
+   817	      .pillars {
+   818	        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+   819	      }
+   820	    }
+   821	
+   822	    @media (max-width: 640px) {
+   823	      .hero {
+   824	        padding: 5rem 1rem 4rem;
+   825	      }
+   826	
+   827	      section {
+   828	        padding: 3rem 1rem;
+   829	      }
+   830	
+   831	      .btn {
+   832	        width: 100%;
+   833	      }
+   834	
+   835	      .actions {
+   836	        flex-direction: column;
+   837	      }
+   838	
+   839	      .cards-grid,
+   840	      .missions-grid {
+   841	        grid-template-columns: 1fr;
+   842	      }
+   843	    }
+   844	
+   845	    /* === ANIMATIONS === */
+   846	    @keyframes fadeInUp {
+   847	      from {
+   848	        opacity: 0;
+   849	        transform: translateY(30px);
+   850	      }
+   851	      to {
+   852	        opacity: 1;
+   853	        transform: translateY(0);
+   854	      }
+   855	    }
+   856	
+   857	    .fade-in {
+   858	      animation: fadeInUp 0.6s ease forwards;
+   859	    }
+   860	
+   861	    /* === FOCUS STATES === */
+   862	    a:focus,
+   863	    button:focus {
+   864	      outline: 3px solid var(--gold-base);
+   865	      outline-offset: 3px;
+   866	    }
+   867	  </style>
+   868	</head>
+   869	<body>
+   870	  <header id="header">
+   871	    <div class="navbar">
+   872	      <a class="navbar-logo" href="#top">
+   873	        <img src="logo-bps.svg" alt="Logo BPS Expertise DAF" width="48" height="48">
+   874	        <span>BPS Expertise DAF</span>
+   875	      </a>
+   876	      <nav aria-label="Navigation principale">
+   877	        <ul>
+   878	          <li><a href="#constat">Le constat</a></li>
+   879	          <li><a href="#services">Mon accompagnement</a></li>
+   880	          <li><a href="#approche">Approche</a></li>
+   881	          <li><a href="#missions">Missions</a></li>
+   882	          <li><a href="#parcours">Parcours</a></li>
+   883	          <li><a href="#finaxim">Finaxim</a></li>
+   884	          <li><a href="#contact">Contact</a></li>
+   885	        </ul>
+   886	      </nav>
+   887	    </div>
+   888	  </header>
+   889	
+   890	  <main id="top">
+   891	    <section class="hero">
+   892	      <div class="hero-inner">
+   893	        <div>
+   894	          <div class="tagline">Pétula Doyon – DAF à temps partagé certifiée Finaxim</div>
+   895	          <h1>Clarté des chiffres. Sérénité des décisions. Souplesse dans l'organisation.</h1>
+   896	          <p class="lead">Vous dirigez une PME, dans les secteurs de l'hôtellerie, du commerce ou du service ? Je vous aide à reprendre le contrôle de votre pilotage financier — cash, marges, trésorerie, digitalisation — grâce à une solution souple, humaine et parfaitement adaptée à votre réalité.</p>
+   897	          <p style="font-size: 1.05rem; margin-bottom: 0.5rem;">🎯 <strong>1 h d'échange découverte offerte</strong> (sans engagement)</p>
+   898	          <div class="actions">
+   899	            <a class="btn btn-primary" href="https://calendly.com/petula-doyon/30min" target="_blank" rel="noopener">Réserver un rendez-vous</a>
+   900	            <a class="btn btn-outline" href="#contact">Voir les coordonnées</a>
+   901	          </div>
+   902	        </div>
+   903	        <div>
+   904	          <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80" alt="Tableau de bord financier présenté lors d'une réunion de direction" width="900" height="600">
+   905	        </div>
+   906	      </div>
+   907	    </section>
+   908	
+   909	    <section id="constat">
+   910	      <div class="section-inner">
+   911	        <h2 class="section-title">Quand la finance passe après l'urgence…</h2>
+   912	        <p class="section-subtitle">Diriger une entreprise, c'est jongler entre développement, trésorerie, recrutement, fournisseurs… Et souvent, la finance devient un point aveugle. Jusqu'au jour où les questions se bousculent. C'est précisément à ce moment que j'interviens : transformer vos chiffres en décisions concrètes, utiles et simples à suivre.</p>
+   913	        <div class="cards-grid">
+   914	          <div class="card">
+   915	            <h3>Vos interrogations</h3>
+   916	            <ul>
+   917	              <li>Où en est vraiment ma rentabilité ?</li>
+   918	              <li>Ai-je la trésorerie nécessaire pour mes projets ?</li>
+   919	              <li>Aucune visibilité sur l'activité en cours avant de recevoir les éléments de clôture fournis par l'expert-comptable.</li>
+   920	              <li>Comment anticiper sans y passer mes soirées ?</li>
+   921	            </ul>
+   922	          </div>
+   923	          <div class="card">
+   924	            <h3>Mon rôle</h3>
+   925	            <p>Je transforme l'urgence en pilotage contrôlé, étape par étape. Vous retrouvez de la visibilité, un langage commun avec vos partenaires, et la sérénité pour décider.</p>
+   926	            <a class="resource-link" href="https://audit.finaxim.fr/auditez-votre-performance-financiere/?expert=pdoyon@finaxim.fr" target="_blank" rel="noopener">Audit flash gratuit</a>
+   927	          </div>
+   928	        </div>
+   929	      </div>
+   930	    </section>
+   931	
+   932	    <section id="services" style="background: var(--cream-white);">
+   933	      <div class="section-inner">
+   934	        <h2 class="section-title">Une direction financière souple, au rythme de vos besoins</h2>
+   935	        <p class="section-subtitle">Chaque entreprise a ses urgences et ses priorités. Mon accompagnement s'adapte à votre situation — qu'il s'agisse de structurer, d'anticiper ou de restaurer le pilotage.</p>
+   936	        <div class="cards-grid">
+   937	          <div class="card">
+   938	            <h3>En phase de croissance</h3>
+   939	            <ul>
+   940	              <li>Structurer la fonction finance et fiabiliser les données</li>
+   941	              <li>Anticiper la trésorerie et accompagner les décisions d'investissement</li>
+   942	              <li>Digitaliser les processus et choisir les bons outils de pilotage</li>
+   943	              <li><strong>Résultat :</strong> croissance maîtrisée, rentabilité consolidée, temps retrouvé</li>
+   944	            </ul>
+   945	          </div>
+   946	          <div class="card">
+   947	            <h3>En période de tension</h3>
+   948	            <ul>
+   949	              <li>Restaurer la visibilité financière et redresser les marges</li>
+   950	              <li>Rassurer les partenaires bancaires et sécuriser le cash</li>
+   951	              <li>Optimiser les outils existants pour gagner en efficacité</li>
+   952	              <li><strong>Résultat :</strong> situation sous contrôle, marges redressées, décisions sereines</li>
+   953	            </ul>
+   954	          </div>
+   955	          <div class="card">
+   956	            <h3>En transition digitale</h3>
+   957	            <ul>
+   958	              <li>Clarifier les flux et préparer la facturation électronique (Facture X obligatoire 2026)</li>
+   959	              <li>Sélectionner et implémenter les outils adaptés (ERP, BI, dashboards)</li>
+   960	              <li>Former vos équipes et accompagner l'adoption</li>
+   961	              <li><strong>Résultat :</strong> conformité, automatisation, gain de temps et fiabilité</li>
+   962	            </ul>
+   963	          </div>
+   964	        </div>
+   965	        <div class="cta-section">
+   966	          <h2>🎯 1 h d'échange découverte offerte</h2>
+   967	          <p>Un temps d'échange privilégié pour comprendre vos enjeux, prioriser vos actions et bâtir ensemble votre feuille de route financière.</p>
+   968	          <a class="btn btn-primary" href="https://calendly.com/petula-doyon/30min" target="_blank" rel="noopener">Réserver un échange découverte</a>
+   969	        </div>
+   970	      </div>
+   971	    </section>
+   972	
+   973	    <section id="approche">
+   974	      <div class="section-inner">
+   975	        <h2 class="section-title">Une approche simple, humaine et orientée résultats</h2>
+   976	        <p class="section-subtitle">Mon objectif : que vous puissiez dire « Je comprends enfin mes chiffres, je dispose des bons outils… et je sais quoi en faire. »</p>
+   977	        <div class="pillars">
+   978	          <div class="pillar">
+   979	            <span>1️⃣</span>
+   980	            <h3>Clarté</h3>
+   981	            <p>Des outils lisibles, pas des usines à chiffres. Je vous propose des tableaux de bord actionnables et adaptés à votre niveau de maturité.</p>
+   982	          </div>
+   983	          <div class="pillar">
+   984	            <span>2️⃣</span>
+   985	            <h3>Souplesse</h3>
+   986	            <p>Une présence à la carte, au rythme de vos besoins. J'intègre vos équipes et vos process pour piloter au plus près du terrain.</p>
+   987	          </div>
+   988	          <div class="pillar">
+   989	            <span>3️⃣</span>
+   990	            <h3>Action</h3>
+   991	            <p>Chaque indicateur débouche sur un plan concret. Nous sécurisons vos objectifs en mobilisant vos équipes et vos partenaires.</p>
+   992	          </div>
+   993	          <div class="pillar">
+   994	            <span>4️⃣</span>
+   995	            <h3>Digitalisation</h3>
+   996	            <p>Le choix, l'implémentation et l'usage optimisé des outils au service de la performance. Je vous accompagne dans la sélection et le déploiement de solutions digitales adaptées à vos enjeux métier et financiers.</p>
+   997	          </div>
+   998	        </div>
+   999	        <div class="resources">
+  1000	          <a class="resource-link" href="https://finaxim.fr/temoignages-video/" target="_blank" rel="noopener">Découvrez Finaxim en vidéo</a>
+  1001	          <a class="resource-link" href="https://finaxim.fr" target="_blank" rel="noopener">Finaxim – Le réseau</a>
+  1002	        </div>
+  1003	      </div>
+  1004	    </section>
+  1005	
+  1006	    <section id="missions" style="background: var(--cream-white);">
+  1007	      <div class="section-inner">
+  1008	        <h2 class="section-title">Des accompagnements sur mesure. Des résultats tangibles.</h2>
+  1009	        <p class="section-subtitle">Ces missions illustrent la pertinence de l'intervention d'un DAF à temps partagé, les résultats et la plus-value attendue pour les dirigeants de PME.</p>
+  1010	        <div class="missions-grid">
+  1011	          <article class="mission-card">
+  1012	            <h3>🏭 PME industrielle en croissance</h3>
+  1013	            <p class="context"><strong>Contexte :</strong> forte accélération du chiffre d'affaires, trésorerie sous tension à cause des délais clients.</p>
+  1014	            <p><strong>Méthode :</strong> diagnostic cash/BFR, plan de trésorerie glissant, relances clients structurées, priorisation des flux fournisseurs.</p>
+  1015	            <ul>
+  1016	              <li>DSO réduit de 18 % en 4 mois</li>
+  1017	              <li>Trésorerie positive sur toute l'année</li>
+  1018	              <li>Dialogue bancaire facilité et taux renégocié</li>
+  1019	            </ul>
+  1020	          </article>
+  1021	          <article class="mission-card">
+  1022	            <h3>🏨 Groupe hôtelier multi-sites</h3>
+  1023	            <p class="context"><strong>Contexte :</strong> manque de visibilité consolidée, marges très variables selon les établissements.</p>
+  1024	            <p><strong>Méthode :</strong> tableau de bord global, reporting par site, indicateurs de performance (RevPAR, marge, coût d'acquisition).</p>
+  1025	            <ul>
+  1026	              <li>Rentabilité par site identifiée et ajustée</li>
+  1027	              <li>Process décisionnel plus rapide</li>
+  1028	              <li>Réduction du coût d'acquisition et meilleure allocation budgétaire</li>
+  1029	            </ul>
+  1030	          </article>
+  1031	          <article class="mission-card">
+  1032	            <h3>🧩 PME en tension de trésorerie</h3>
+  1033	            <p class="context"><strong>Contexte :</strong> retards de paiement récurrents, pression des fournisseurs, absence de pilotage.</p>
+  1034	            <p><strong>Méthode :</strong> audit du cycle order-to-cash, renégociation des échéanciers, politique de relance et suivi hebdomadaire.</p>
+  1035	            <ul>
+  1036	              <li>Réduction des impayés de 40 %</li>
+  1037	              <li>Rétablissement d'un solde cash positif en 3 mois</li>
+  1038	              <li>Confiance restaurée avec les partenaires financiers</li>
+  1039	            </ul>
+  1040	          </article>
+  1041	          <article class="mission-card">
+  1042	            <h3>🔧 PME en transformation digitale</h3>
+  1043	            <p class="context"><strong>Contexte :</strong> multiples outils non connectés, ressaisies manuelles, perte de temps et erreurs récurrentes.</p>
+  1044	            <p><strong>Méthode :</strong> audit de la stack techno, sélection d'un ERP adapté, accompagnement déploiement, formation équipes, suivi post-implémentation.</p>
+  1045	            <ul>
+  1046	              <li>Temps de clôture réduit de 10 jours à 3 jours</li>
+  1047	              <li>Élimination des ressaisies (gain 15h/semaine)</li>
+  1048	              <li>Tableaux de bord temps réel opérationnels</li>
+  1049	              <li>ROI positif en 8 mois</li>
+  1050	            </ul>
+  1051	          </article>
+  1052	        </div>
+  1053	        <div class="cta-section">
+  1054	          <h2>Prêt·e à retrouver de la visibilité financière ?</h2>
+  1055	          <p>Je vous propose un entretien découverte d'1 h, offert et sans engagement, pour faire le point sur vos défis financiers, explorer vos priorités et identifier les leviers à activer.</p>
+  1056	          <a class="btn btn-primary" href="https://calendly.com/petula-doyon/30min" target="_blank" rel="noopener">Discutons de votre situation</a>
+  1057	        </div>
+  1058	      </div>
+  1059	    </section>
+  1060	
+  1061	    <section id="parcours">
+  1062	      <div class="section-inner">
+  1063	        <h2 class="section-title">Qui je suis, pourquoi je le fais</h2>
+  1064	        <div class="profile">
+  1065	          <img src="petula-doyon.png.png" alt="Portrait professionnel de Pétula Doyon, DAF à temps partagé certifiée Finaxim" width="400" height="500" loading="lazy">
+  1066	          <div>
+  1067	            <p>Je m'appelle <strong>Pétula Doyon</strong>. Depuis plus de dix ans, je navigue à l'intersection de la finance, de la stratégie et du terrain.</p>
+  1068	            <p>Mon parcours débute dans l'<strong>hôtellerie</strong> — j'ai connu les contraintes de saisonnalité, l'arbitrage des coûts, la quête du RevPAR.</p>
+  1069	            <p>J'ai ensuite intégré une filiale américaine dans le secteur du <strong>commerce BtoB de marquage industriel</strong>, en tant que <strong>Directrice Administrative et Financière</strong> – membre du Comité de Direction. Véritable bras droit du dirigeant, j'ai conduit la transformation de la fonction finance dans un environnement international exigeant :</p>
+  1070	            <ul>
+  1071	              <li>Pilotage du cash, du BFR et du DSO</li>
+  1072	              <li>Clôtures mensuelles et reporting multi-normes IFRS / US GAAP / French GAAP</li>
+  1073	              <li>Animation du forecast et du budget, avec suivi des écarts et plans d'action</li>
+  1074	              <li>Structuration des process transverses (order-to-cash, procure-to-pay, contrôle interne)</li>
+  1075	              <li>Coordination des audits (CAC, auditeurs US, experts-comptables)</li>
+  1076	            </ul>
+  1077	            <p>Mon rôle allait bien au-delà des chiffres : <strong>co-piloter la stratégie, soutenir la décision, anticiper les risques et sécuriser la croissance</strong>.</p>
+  1078	            <p>Cette expérience m'a forgé une approche globale et pragmatique du pilotage d'entreprise — à la fois stratégique, opérationnelle et orientée résultats.</p>
+  1079	            <p>Ce double contexte — hôtellerie exigeante et industrie structurée — m'a forgé une sensibilité rare : je pense en chiffres, mais je raisonne en hommes, équipes et réalités opérationnelles.</p>
+  1080	            <p>Aujourd'hui, j'interviens comme <strong>DAF à temps partagé</strong>. Mon credo ? <strong>« Vos chiffres doivent vous servir, pas vous épuiser. »</strong> Avec moi, pas de jargon inutile ni de promesses creuses. Seulement des plans d'action, des bilans clairs, des décisions éclairées — et une collaboration sur-mesure.</p>
+  1081	            <div class="certifications">
+  1082	              <img src="logo-finaxim-certification.png" alt="Badge Directrice certifiée Finaxim" width="120" height="120">
+  1083	              <img src="logo-bps.svg" alt="Logo BPS Expertise DAF" width="120" height="120">
+  1084	            </div>
+  1085	          </div>
+  1086	        </div>
+  1087	      </div>
+  1088	    </section>
+  1089	
+  1090	    <section id="finaxim" style="background: var(--cream-white);">
+  1091	      <div class="section-inner">
+  1092	        <h2 class="section-title">Pourquoi s'appuyer sur moi et le réseau Finaxim</h2>
+  1093	        <div class="cards-grid">
+  1094	          <div class="card">
+  1095	            <h3>Finaxim en chiffres</h3>
+  1096	            <ul>
+  1097	              <li>+25 ans d'expertise dans le temps partagé</li>
+  1098	              <li>+100 experts actifs sur tout le territoire</li>
+  1099	              <li>+500 missions réalisées chaque année</li>
+  1100	              <li>Fonctions support : finance, RH, DSI, commerce, RSE, recrutement, marketing</li>
+  1101	            </ul>
+  1102	          </div>
+  1103	          <div class="card">
+  1104	            <h3>Valeur pour votre entreprise</h3>
+  1105	            <p>Je suis <strong>DAF certifiée Finaxim</strong>, membre d'un réseau national de cadres exécutifs. Grâce à cette communauté, je mobilise rapidement des experts complémentaires (juridique, SI, RH…) pour enrichir votre mission.</p>
+  1106	            <p><strong>Valeur ajoutée :</strong> solidité collective + flexibilité individuelle. Vous bénéficiez d'un accompagnement rigoureux tout en préservant la souplesse de votre structure.</p>
+  1107	            <a class="resource-link" href="https://finaxim.fr" target="_blank" rel="noopener">En savoir plus sur Finaxim</a>
+  1108	          </div>
+  1109	        </div>
+  1110	      </div>
+  1111	    </section>
+  1112	
+  1113	    <section id="faq">
+  1114	      <div class="section-inner">
+  1115	        <h2 class="section-title">Questions fréquentes</h2>
+  1116	        <p class="section-subtitle">Les réponses aux questions les plus courantes sur le DAF à temps partagé et mon accompagnement.</p>
+  1117	        <div class="faq-container">
+  1118	          <div class="faq-item">
+  1119	            <h3>Qu'est-ce qu'un DAF à temps partagé ?</h3>
+  1120	            <p>Un DAF à temps partagé est un directeur administratif et financier expérimenté qui intervient de manière flexible dans votre entreprise, selon vos besoins (quelques jours par mois). Vous bénéficiez d'une expertise de haut niveau sans les coûts d'un recrutement à temps plein.</p>
+  1121	          </div>
+  1122	          <div class="faq-item">
+  1123	            <h3>Quand faire appel à un directeur financier externalisé ?</h3>
+  1124	            <p>Faites appel à un DAF externalisé lorsque vous rencontrez des tensions de trésorerie, manquez de visibilité sur vos marges, préparez une levée de fonds, lancez une transformation digitale, ou souhaitez structurer votre pilotage financier sans alourdir vos charges fixes.</p>
+  1125	          </div>
+  1126	          <div class="faq-item">
+  1127	            <h3>Quelle différence entre DAF et expert-comptable ?</h3>
+  1128	            <p>L'expert-comptable produit vos comptes annuels et assure la conformité fiscale. Le DAF à temps partagé pilote votre performance : trésorerie, marges, budget, prévisions, outils de pilotage. Les deux sont complémentaires, pas concurrents.</p>
+  1129	          </div>
+  1130	          <div class="faq-item">
+  1131	            <h3>Combien coûte un DAF temps partagé ?</h3>
+  1132	            <p>Le coût dépend du volume d'intervention (nombre de jours/mois) et de la complexité de votre situation. En général, comptez entre 1 500 € et 3 500 € par mois pour un accompagnement régulier. C'est 3 à 5 fois moins cher qu'un DAF salarié à temps plein.</p>
+  1133	          </div>
+  1134	          <div class="faq-item">
+  1135	            <h3>Quels secteurs bénéficient d'un DAF externalisé ?</h3>
+  1136	            <p>Tous les secteurs ! J'interviens particulièrement auprès des PME en <strong>hôtellerie-restauration, commerce BtoB, services</strong>, mais aussi industrie, distribution, conseil. L'essentiel est d'avoir des enjeux de pilotage financier, trésorerie ou digitalisation.</p>
+  1137	          </div>
+  1138	          <div class="faq-item">
+  1139	            <h3>Accompagnez-vous la transformation digitale des PME ?</h3>
+  1140	            <p>Oui, j'accompagne les PME dans le choix et l'implémentation d'outils de pilotage adaptés : ERP, BI, facturation électronique, dashboards. L'objectif : optimiser vos processus financiers, éliminer les ressaisies et gagner en efficacité. Je vous aide aussi à préparer la <strong>facturation électronique obligatoire en 2026 (Facture X)</strong>.</p>
+  1141	          </div>
+  1142	        </div>
+  1143	      </div>
+  1144	    </section>
+  1145	
+  1146	    <section id="contact">
+  1147	      <div class="section-inner">
+  1148	        <h2 class="section-title">Et si on en parlait simplement ?</h2>
+  1149	        <p class="section-subtitle">Je vous propose un entretien découverte d'1 h, offert et sans engagement. Un temps d'échange privilégié pour comprendre vos enjeux, vos priorités et identifier ensemble vos leviers de performance.</p>
+  1150	        <div class="cards-grid">
+  1151	          <div class="card" style="background: linear-gradient(135deg, var(--navy-darker), var(--navy-medium)); color: var(--text-light);">
+  1152	            <h3 style="color: var(--gold-lighter);">📅 Réserver un créneau</h3>
+  1153	            <p style="color: var(--cream-light);">Choisissez directement le créneau qui vous convient sur mon agenda en ligne.</p>
+  1154	            <a class="btn btn-primary" href="https://calendly.com/petula-doyon/30min" target="_blank" rel="noopener">Planifier 1 h offerte</a>
+  1155	          </div>
+  1156	          <div class="card">
+  1157	            <h3>📬 Me contacter</h3>
+  1158	            <p><strong>Email :</strong> <a href="mailto:pdoyon@finaxim.fr" style="color: var(--navy-medium); text-decoration: underline;">pdoyon@finaxim.fr</a></p>
+  1159	            <p><strong>Téléphone :</strong> <a href="tel:+33783875545" style="color: var(--navy-medium); text-decoration: underline;">07 83 87 55 45</a></p>
+  1160	            <p><strong>LinkedIn :</strong> <a href="https://www.linkedin.com/in/petula-doyon" target="_blank" rel="noopener" style="color: var(--navy-medium); text-decoration: underline;">petula-doyon</a></p>
+  1161	            <p><strong>Audit flash :</strong> <a href="https://audit.finaxim.fr/auditez-votre-performance-financiere/?expert=pdoyon@finaxim.fr" target="_blank" rel="noopener" style="color: var(--navy-medium); text-decoration: underline;">Auditez votre performance financière</a></p>
+  1162	          </div>
+  1163	        </div>
+  1164	      </div>
+  1165	    </section>
+  1166	  </main>
+  1167	
+  1168	  <footer>
+  1169	    <div class="footer-inner">
+  1170	      <div>
+  1171	        <img src="logo-bps.svg" alt="Logo BPS Expertise DAF" style="width: 90px;" width="90" height="90">
+  1172	        <p>BPS Expertise DAF – Direction financière à temps partagé menée par Pétula Doyon, DAF certifiée Finaxim.</p>
+  1173	        <div class="socials">
+  1174	          <a href="https://www.linkedin.com/in/petula-doyon" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+  1175	          <a href="https://calendly.com/petula-doyon/30min" target="_blank" rel="noopener" aria-label="Calendly">📅</a>
+  1176	        </div>
+  1177	      </div>
+  1178	      <div class="footer-links">
+  1179	        <strong>Liens utiles</strong>
+  1180	        <a href="https://finaxim.fr" target="_blank" rel="noopener">Réseau Finaxim</a>
+  1181	        <a href="https://finaxim.fr/temoignages-video/" target="_blank" rel="noopener">Découvrir Finaxim en vidéo</a>
+  1182	        <a href="https://audit.finaxim.fr/auditez-votre-performance-financiere/?expert=pdoyon@finaxim.fr" target="_blank" rel="noopener">Audit flash gratuit</a>
+  1183	        <a href="#contact">Prendre rendez-vous</a>
+  1184	      </div>
+  1185	      <div class="footer-links">
+  1186	        <strong>Ressources</strong>
+  1187	        <a href="#missions">Cas clients</a>
+  1188	        <a href="#approche">Approche</a>
+  1189	        <a href="#parcours">Parcours</a>
+  1190	        <a href="#finaxim">Réseau Finaxim</a>
+  1191	      </div>
+  1192	    </div>
+  1193	    <div class="footer-bottom">
+  1194	      <p>&copy; 2025 BPS Expertise DAF – Pétula Doyon. Mentions légales | Politique de confidentialité</p>
+  1195	      <p>Télécharger mon e-book : « Facture X — Comment s'y préparer concrètement »</p>
+  1196	    </div>
+  1197	  </footer>
+  1198	
+  1199	  <!-- Schema.org structured data -->
+  1200	  <script type="application/ld+json">
+  1201	  {
+  1202	    "@context": "https://schema.org",
+  1203	    "@type": "ProfessionalService",
+  1204	    "name": "BPS Expertise DAF - Pétula Doyon",
+  1205	    "image": "https://bps-expertise-daf.com/petula-doyon.png",
+  1206	    "description": "DAF à temps partagé certifiée Finaxim. Direction financière externalisée pour PME : pilotage financier, trésorerie, digitalisation.",
+  1207	    "address": {
+  1208	      "@type": "PostalAddress",
+  1209	      "addressCountry": "FR"
+  1210	    },
+  1211	    "telephone": "+33783875545",
+  1212	    "email": "pdoyon@finaxim.fr",
+  1213	    "url": "https://bps-expertise-daf.com",
+  1214	    "priceRange": "€€",
+  1215	    "aggregateRating": {
+  1216	      "@type": "AggregateRating",
+  1217	      "ratingValue": "5",
+  1218	      "reviewCount": "23"
+  1219	    },
+  1220	    "hasOfferCatalog": {
+  1221	      "@type": "OfferCatalog",
+  1222	      "name": "Services DAF temps partagé",
+  1223	      "itemListElement": [
+  1224	        {
+  1225	          "@type": "Offer",
+  1226	          "itemOffered": {
+  1227	            "@type": "Service",
+  1228	            "name": "DAF en phase de croissance",
+  1229	            "description": "Structuration finance, anticipation trésorerie, digitalisation processus"
+  1230	          }
+  1231	        },
+  1232	        {
+  1233	          "@type": "Offer",
+  1234	          "itemOffered": {
+  1235	            "@type": "Service",
+  1236	            "name": "DAF en période de tension",
+  1237	            "description": "Restauration visibilité financière, redressement marges, sécurisation cash"
+  1238	          }
+  1239	        },
+  1240	        {
+  1241	          "@type": "Offer",
+  1242	          "itemOffered": {
+  1243	            "@type": "Service",
+  1244	            "name": "DAF en transformation digitale",
+  1245	            "description": "Facturation électronique, sélection ERP/BI, formation équipes"
+  1246	          }
+  1247	        }
+  1248	      ]
+  1249	    }
+  1250	  }
+  1251	  </script>
+  1252	
+  1253	  <script type="application/ld+json">
+  1254	  {
+  1255	    "@context": "https://schema.org",
+  1256	    "@type": "Person",
+  1257	    "name": "Pétula Doyon",
+  1258	    "jobTitle": "Directrice Administrative et Financière à temps partagé",
+  1259	    "worksFor": {
+  1260	      "@type": "Organization",
+  1261	      "name": "BPS Expertise DAF"
+  1262	    },
+  1263	    "alumniOf": "Finaxim",
+  1264	    "knowsAbout": ["Direction financière", "Pilotage financier PME", "Trésorerie", "Digitalisation financière", "Facturation électronique", "DAF temps partagé"],
+  1265	    "email": "pdoyon@finaxim.fr",
+  1266	    "telephone": "+33783875545",
+  1267	    "url": "https://www.linkedin.com/in/petula-doyon"
+  1268	  }
+  1269	  </script>
+  1270	
+  1271	  <script type="application/ld+json">
+  1272	  {
+  1273	    "@context": "https://schema.org",
+  1274	    "@type": "FAQPage",
+  1275	    "mainEntity": [
+  1276	      {
+  1277	        "@type": "Question",
+  1278	        "name": "Qu'est-ce qu'un DAF à temps partagé ?",
+  1279	        "acceptedAnswer": {
+  1280	          "@type": "Answer",
+  1281	          "text": "Un DAF à temps partagé est un directeur administratif et financier expérimenté qui intervient de manière flexible dans votre entreprise, selon vos besoins (quelques jours par mois). Vous bénéficiez d'une expertise de haut niveau sans les coûts d'un recrutement à temps plein."
+  1282	        }
+  1283	      },
+  1284	      {
+  1285	        "@type": "Question",
+  1286	        "name": "Quand faire appel à un directeur financier externalisé ?",
+  1287	        "acceptedAnswer": {
+  1288	          "@type": "Answer",
+  1289	          "text": "Faites appel à un DAF externalisé lorsque vous rencontrez des tensions de trésorerie, manquez de visibilité sur vos marges, préparez une levée de fonds, lancez une transformation digitale, ou souhaitez structurer votre pilotage financier sans alourdir vos charges fixes."
+  1290	        }
+  1291	      },
+  1292	      {
+  1293	        "@type": "Question",
+  1294	        "name": "Quelle différence entre DAF et expert-comptable ?",
+  1295	        "acceptedAnswer": {
+  1296	          "@type": "Answer",
+  1297	          "text": "L'expert-comptable produit vos comptes annuels et assure la conformité fiscale. Le DAF à temps partagé pilote votre performance : trésorerie, marges, budget, prévisions, outils de pilotage. Les deux sont complémentaires, pas concurrents."
+  1298	        }
+  1299	      },
+  1300	      {
+  1301	        "@type": "Question",
+  1302	        "name": "Combien coûte un DAF temps partagé ?",
+  1303	        "acceptedAnswer": {
+  1304	          "@type": "Answer",
+  1305	          "text": "Le coût dépend du volume d'intervention (nombre de jours/mois) et de la complexité de votre situation. En général, comptez entre 1 500 € et 3 500 € par mois pour un accompagnement régulier. C'est 3 à 5 fois moins cher qu'un DAF salarié à temps plein."
+  1306	        }
+  1307	      },
+  1308	      {
+  1309	        "@type": "Question",
+  1310	        "name": "Quels secteurs bénéficient d'un DAF externalisé ?",
+  1311	        "acceptedAnswer": {
+  1312	          "@type": "Answer",
+  1313	          "text": "Tous les secteurs ! J'interviens particulièrement auprès des PME en hôtellerie-restauration, commerce BtoB, services, mais aussi industrie, distribution, conseil. L'essentiel est d'avoir des enjeux de pilotage financier, trésorerie ou digitalisation."
+  1314	        }
+  1315	      },
+  1316	      {
+  1317	        "@type": "Question",
+  1318	        "name": "Accompagnez-vous la transformation digitale des PME ?",
+  1319	        "acceptedAnswer": {
+  1320	          "@type": "Answer",
+  1321	          "text": "Oui, j'accompagne les PME dans le choix et l'implémentation d'outils de pilotage adaptés : ERP, BI, facturation électronique, dashboards. L'objectif : optimiser vos processus financiers, éliminer les ressaisies et gagner en efficacité. Je vous aide aussi à préparer la facturation électronique obligatoire en 2026 (Facture X)."
+  1322	        }
+  1323	      }
+  1324	    ]
+  1325	  }
+  1326	  </script>
+  1327	
+  1328	  <script>
+  1329	    // Scroll effect for header
+  1330	    const header = document.getElementById('header');
+  1331	    let lastScroll = 0;
+  1332	
+  1333	    window.addEventListener('scroll', () => {
+  1334	      const currentScroll = window.pageYOffset;
+  1335	      
+  1336	      if (currentScroll > 100) {
+  1337	        header.classList.add('scrolled');
+  1338	      } else {
+  1339	        header.classList.remove('scrolled');
+  1340	      }
+  1341	      
+  1342	      lastScroll = currentScroll;
+  1343	    });
+  1344	
+  1345	    // Smooth scroll for anchor links
+  1346	    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  1347	      anchor.addEventListener('click', function (e) {
+  1348	        e.preventDefault();
+  1349	        const target = document.querySelector(this.getAttribute('href'));
+  1350	        if (target) {
+  1351	          target.scrollIntoView({
+  1352	            behavior: 'smooth',
+  1353	            block: 'start'
+  1354	          });
+  1355	        }
+  1356	      });
+  1357	    });
+  1358	
+  1359	    // Intersection Observer for fade-in animations
+  1360	    const observerOptions = {
+  1361	      threshold: 0.1,
+  1362	      rootMargin: '0px 0px -50px 0px'
+  1363	    };
+  1364	
+  1365	    const observer = new IntersectionObserver((entries) => {
+  1366	      entries.forEach(entry => {
+  1367	        if (entry.isIntersecting) {
+  1368	          entry.target.classList.add('fade-in');
+  1369	          observer.unobserve(entry.target);
+  1370	        }
+  1371	      });
+  1372	    }, observerOptions);
+  1373	
+  1374	    // Observe cards, pillars, and mission cards
+  1375	    document.querySelectorAll('.card, .pillar, .mission-card, .faq-item').forEach(el => {
+  1376	      observer.observe(el);
+  1377	    });
+  1378	  </script>
+  1379	</body>
+  1380	</html>
